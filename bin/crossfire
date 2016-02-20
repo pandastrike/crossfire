@@ -1,0 +1,29 @@
+#!/bin/bash
+
+case "$1" in
+
+  clean)
+    containers=$(docker ps | grep crossfire | awk '{ print $1 }')
+    for container in $containers; do
+      echo $'Cleaning up container' $container $'...'
+      docker stop $container && docker rm $container
+    done
+    echo $'Removing crossfire images ...'
+    docker rmi crossfire
+    ;;
+
+  build)
+    echo $'Building crossfire image...'
+    docker build -t crossfire .
+    ;;
+
+  run)
+    echo $'Running crossfire container...'
+    docker run -p 80:80 --restart always -d crossfire:latest
+    ;;
+
+  *)
+    echo $'Hm...'
+    echo $'I don\'t know how to do that.'
+    exit 1
+esac

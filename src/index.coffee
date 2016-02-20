@@ -18,27 +18,40 @@ parseHost = do (re=/^(\w+)(\.(\w+\.\w+))?(:(\d+))?$/) ->
       {}
 
 Routes =
-  find: (request) ->
+  find: async (request) ->
     {name, domain} = parseHost request.headers.host
+    console.log "finding routes with ", {name, domain}
     if domain?
-      console.log "_#{name}._http.#{domain}"
-      promise (resolve, reject) ->
-        dns.resolveSrv "_#{name}._http.#{domain}"
-        .then (addresses) ->
-          resolve addresses[Math.round(Math.random() * (addresses.length - 1))]
+      addresses = yield dns.resolveSrv "_#{name}._http.#{domain}"
+      address = addresses[Math.round(Math.random() * (addresses.length - 1))]
+      console.log "found route #{address.name}:#{address.port}"
+      address
 
 Proxy =
 
+  log: do (n=0) ->
+    (next) ->
+      (request, response) ->
+        {url, method, headers} = request
+        host = if headers.host? then headers.host else "-"
+        console.log "request #{n}: #{host} #{method} #{url}"
+        do (n) ->
+          response.on "finish", ->
+            {statusCode} = response
+            console.log "response #{n}: #{statusCode}"
+        n++
+        next request, response
+
   start: (_port) ->
-    http.createServer async (request, response) ->
+    http.createServer Proxy.log async (request, response) ->
       {url, method, headers} = request
-      console.log headers.host, method, url
       try
         {name, port} = yield Routes.find request
         # not sure we need this, but we don't want to rely
         # on the OS to resolve these names since they may
         # be changing pretty frequently...
         [host] = yield dns.resolve name
+        console.log "resolved #{name} to #{host}"
         request.pipe http.request {host, port, url, method, headers},
           (_response) -> _response.pipe response
       catch error
