@@ -12,24 +12,25 @@ _web._http. 10 IN SRV 0 0 32777 swarm-0.blurb9.com.
 
 ## Run Crossfire
 
-In Docker, you can deploy this to the same swarm you're running your other endpoints. Or you can do it on a separate swarm. Or not use Docker at all, of course. But, using Docker:
+Just run `npm start` to run the server. You can pass a port if you want.
+
+You can also run on a Docker host:
 
 ```
-docker run -p 80:80 -d crossfire:latest
+bin/crossfire build
+bin/crossfire run
 ```
 
-## Build Crossfire
-
-You may need to build an image, which you can do by cloning and running:
+You can clean up a Docker deployment with `clean`:
 
 ```
-docker build -t crossfire .
+bin/crossfire clean
 ```
+
+To load balance across crossfire instances, just run multiple instances and add them to your load balancer.
 
 ## Test It Out
 
-```
-curl web.blurb9.com
-```
+Provided your DNS entries are set up correctly and you should be able to test with `curl` or a Web browser.
 
-Because we're dealing with DNS, you may run into problems with stale DNS entries. Be sure to set low TTLs and use a DNS service that updates itself frequently.
+You may run into problems with stale DNS entries. Be sure to set low TTLs and use a DNS service that updates itself frequently.
