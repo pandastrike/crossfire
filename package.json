@@ -1,0 +1,30 @@
+{
+  "name": "crossfire",
+  "version": "1.0.0-alpha-00",
+  "description": "A simple proxy that uses DNS SRV records to dynamically update its routing table.",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "coffee src/index.coffee",
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pandastrike/crossfire.git"
+  },
+  "keywords": [
+    "DNS",
+    "SRV",
+    "reverse",
+    "proxy"
+  ],
+  "author": "Dan Yoder",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pandastrike/crossfire/issues"
+  },
+  "homepage": "https://github.com/pandastrike/crossfire#readme",
+  "dependencies": {
+    "fairmont": "^1.0.0-beta-40",
+    "when": "^3.7.7"
+  }
+}
