@@ -52,8 +52,11 @@ Proxy =
         # be changing pretty frequently...
         [host] = yield dns.resolve name
         console.log "resolved #{name} to #{host}"
-        request.pipe http.request {host, port, url, method, headers},
-          (_response) -> _response.pipe response
+        console.log "proxying request", {host, port, path: url, method, headers}
+        request.pipe http.request {host, port, path: url, method, headers},
+          (_response) ->
+            response.writeHead _response.statusCode, _response.headers
+            _response.pipe response
       catch error
         response.statusCode = 503
         response.end()

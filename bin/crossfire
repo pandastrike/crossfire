@@ -2,24 +2,26 @@
 
 case "$1" in
 
-  clean)
+  stop)
     containers=$(docker ps | grep crossfire | awk '{ print $1 }')
     for container in $containers; do
       echo $'Cleaning up container' $container $'...'
       docker stop $container && docker rm $container
     done
-    echo $'Removing crossfire images ...'
-    docker rmi crossfire
+    # echo $'Removing crossfire images ...'
+    # docker rmi pandastrike/crossfire
     ;;
 
   build)
     echo $'Building crossfire image...'
-    docker build -t crossfire .
+    docker build -t pandastrike/crossfire .
+    sleep 2
+    docker push pandastrike/crossfire
     ;;
 
   run)
     echo $'Running crossfire container...'
-    docker run -p 80:80 --restart always -d crossfire:latest
+    docker run -p 80:80 --restart always -d pandastrike/crossfire:latest
     ;;
 
   *)
