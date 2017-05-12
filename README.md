@@ -1,5 +1,8 @@
 # Crossfire
 
+> **Important** This project is deprecated and unsupported.
+> Please check out [Panda Sky](https://sky.pandastrike.com).
+
 A simple proxy that uses DNS SRV records to dynamically update its routing table.
 
 ## Set Up SRV Records
