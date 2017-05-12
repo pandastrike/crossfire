@@ -1,36 +1,23 @@
-# Crossfire
+IyBDcm9zc2ZpcmUKCkEgc2ltcGxlIHByb3h5IHRoYXQgdXNlcyBETlMgU1JW
+IHJlY29yZHMgdG8gZHluYW1pY2FsbHkgdXBkYXRlIGl0cyByb3V0aW5nIHRh
+> **Important** This project is deprecated and unsupported.
+> Please check out [Panda Sky](https://sky.pandastrike.com).
 
-A simple proxy that uses DNS SRV records to dynamically update its routing table.
-
-## Set Up SRV Records
-
-To map `web.blurb9.com:80` to `swarm-0.blurb9.com:32777`, define an SRV record like this:
-
-```
-_web._http. 10 IN SRV 0 0 32777 swarm-0.blurb9.com.
-```
-
-## Run Crossfire
-
-Just run `npm start` to run the server. You can pass a port if you want.
-
-You can also run on a Docker host:
-
-```
-bin/crossfire build
-bin/crossfire run
-```
-
-You can clean up a Docker deployment with `clean`:
-
-```
-bin/crossfire clean
-```
-
-To load balance across crossfire instances, just run multiple instances and add them to your load balancer.
-
-## Test It Out
-
-Provided your DNS entries are set up correctly and you should be able to test with `curl` or a Web browser.
-
-You may run into problems with stale DNS entries. Be sure to set low TTLs and use a DNS service that updates itself frequently.
+YmxlLgoKIyMgU2V0IFVwIFNSViBSZWNvcmRzCgpUbyBtYXAgYHdlYi5ibHVy
+YjkuY29tOjgwYCB0byBgc3dhcm0tMC5ibHVyYjkuY29tOjMyNzc3YCwgZGVm
+aW5lIGFuIFNSViByZWNvcmQgbGlrZSB0aGlzOgoKYGBgCl93ZWIuX2h0dHAu
+IDEwIElOIFNSViAwIDAgMzI3Nzcgc3dhcm0tMC5ibHVyYjkuY29tLgpgYGAK
+CiMjIFJ1biBDcm9zc2ZpcmUKCkp1c3QgcnVuIGBucG0gc3RhcnRgIHRvIHJ1
+biB0aGUgc2VydmVyLiBZb3UgY2FuIHBhc3MgYSBwb3J0IGlmIHlvdSB3YW50
+LgoKWW91IGNhbiBhbHNvIHJ1biBvbiBhIERvY2tlciBob3N0OgoKYGBgCmJp
+bi9jcm9zc2ZpcmUgYnVpbGQKYmluL2Nyb3NzZmlyZSBydW4KYGBgCgpZb3Ug
+Y2FuIGNsZWFuIHVwIGEgRG9ja2VyIGRlcGxveW1lbnQgd2l0aCBgY2xlYW5g
+OgoKYGBgCmJpbi9jcm9zc2ZpcmUgY2xlYW4KYGBgCgpUbyBsb2FkIGJhbGFu
+Y2UgYWNyb3NzIGNyb3NzZmlyZSBpbnN0YW5jZXMsIGp1c3QgcnVuIG11bHRp
+cGxlIGluc3RhbmNlcyBhbmQgYWRkIHRoZW0gdG8geW91ciBsb2FkIGJhbGFu
+Y2VyLgoKIyMgVGVzdCBJdCBPdXQKClByb3ZpZGVkIHlvdXIgRE5TIGVudHJp
+ZXMgYXJlIHNldCB1cCBjb3JyZWN0bHkgYW5kIHlvdSBzaG91bGQgYmUgYWJs
+ZSB0byB0ZXN0IHdpdGggYGN1cmxgIG9yIGEgV2ViIGJyb3dzZXIuCgpZb3Ug
+bWF5IHJ1biBpbnRvIHByb2JsZW1zIHdpdGggc3RhbGUgRE5TIGVudHJpZXMu
+IEJlIHN1cmUgdG8gc2V0IGxvdyBUVExzIGFuZCB1c2UgYSBETlMgc2Vydmlj
+ZSB0aGF0IHVwZGF0ZXMgaXRzZWxmIGZyZXF1ZW50bHkuCg==
